@@ -1,0 +1,461 @@
+		<!-- Navigation -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header page-scroll">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand page-scroll" href="/"><span style="font-weight:500; font-size:40px"><i class="fa fa-flask"></i>&nbsp;Event Lab</span></a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="hidden">
+							<a href="#page-top"></a>
+						</li>
+            			<!--li class="dropdown" dropdown >
+            				<a href="#" class="dropdown-toggle" dropdown-toggle data-toggle="dropdown" role="button" aria-expanded="false">{{ chosenMetro }}<span class="caret"></span></a>
+                 			<ul class="dropdown-menu" aria-labelledby="dropdownMenu0">
+                 				<li ng-repeat="metro in metroList"><a href="" ng-click="metroSelected(metro)">{{ metro }}</a></li>
+                 			</ul>
+            			</li-->
+            			<li class="dropdown" dropdown >
+            				<a href="#" class="dropdown-toggle" dropdown-toggle data-toggle="dropdown" role="button" aria-expanded="false">{{ chosenDay }}<span class="caret"></span></a>
+                 			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                 				<li ng-repeat="day in dayList"><a href="" ng-click="daySelected(day)">{{ day }}</a></li>
+                 			</ul>
+            			</li>
+            			<li class="dropdown" dropdown >
+            				<a href="#" class="dropdown-toggle" dropdown-toggle data-toggle="dropdown" role="button" aria-expanded="false">{{ chosenFilter }}<span class="caret"></span></a>
+                 			<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                 				<li ng-repeat="filter in filterList"><a href="" ng-click="filterSelected(filter)">{{ filter }}</a></li>
+                 			</ul>
+            			</li>
+
+            			<li class="dropdown" dropdown >
+            				<a href="#" class="dropdown-toggle" dropdown-toggle data-toggle="dropdown" role="button" aria-expanded="false">{{ chosenCity }}<span class="caret"></span></a>
+                 			<ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                 				<li ng-repeat="city in cityList"><a href="" ng-click="citySelected(city)">{{ city }}</a></li>
+                 			</ul>
+           				 </li>
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+
+
+		<!-- Header -->
+		<header class="eventsheader light-bg">
+			<div class="container">
+				<div class="slider-container">
+
+
+					<div class="intro-text">
+						<div class="intro-lead-in">&nbsp; Do something interesting &nbsp;</div>
+						<div class="intro-heading-events">{{chosenDay}} in {{chosenCity}}: {{ eventList.length }} </div>
+					</div>
+
+				</div>
+			</div>
+		</header>
+<!--style>
+/* ---- grid ---- */
+
+* { box-sizing: border-box; }
+
+body { font-family: sans-serif; }
+
+/* ---- grid ---- */
+
+.grid {
+  background: #EEE;
+  max-width: 900px;
+}
+
+/* clearfix */
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* ---- grid-item ---- */
+
+.grid-item {
+  width: 160px;
+  height: 120px;
+  float: left;
+  background: #D26;
+  border: 2px solid #333;
+  border-color: hsla(0, 0%, 0%, 0.5);
+  border-radius: 5px;
+}
+
+.grid-item--width2 { width: 320px; }
+.grid-item--width3 { width: 480px; }
+.grid-item--width4 { width: 640px; }
+
+.grid-item--height2 { height: 200px; }
+.grid-item--height3 { height: 260px; }
+.grid-item--height4 { height: 360px; }
+
+</style-->
+
+<!--script>
+
+$('.grid').masonry({
+  itemSelector: '.grid-item',
+  columnWidth: 200
+});
+
+
+</script-->
+
+
+
+<!--div class="grid">
+  <div class="grid-item"></div>
+
+  <div class="grid-item grid-item--height3"></div>
+  <div class="grid-item grid-item--height2"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+   <div class="grid-item grid-item--height3"></div>
+  <div class="grid-item grid-item--height2"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+   <div class="grid-item grid-item--height3"></div>
+  <div class="grid-item grid-item--height2"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+
+</div-->
+
+<style>
+.dynamic-grid {
+  position: relative;
+  display: none;
+}
+.dynamic-grid.angular-grid {
+  display: block;
+}
+.grid {
+  position: absolute;
+  list-style: none;
+  background: #ffffff;;
+  box-sizing: border-box;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.grid-img {
+    width: 100%;
+    vertical-align: middle;
+    -webkit-transition: opacity 0.6s ease-out;
+    transition: opacity 0.6s ease-out;
+    background-color: #fff;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.grid-img.img-loaded{
+    visibility: visible;
+    opacity: 1;
+}
+.right-inner-addon {
+    position: relative;
+}
+.right-inner-addon input {
+    padding-right: 30px;
+}
+.right-inner-addon i {
+    position: absolute;
+    right: 0px;
+    padding: 10px 12px;
+    pointer-events: none;
+}
+</style>
+
+    <div id="demo" class="light-bg">
+        <div id="searchFilterWrap" class="light-bg">
+            <form id="searchForm">
+          		<div class="right-inner-addon ">    <i class="fa fa-search"></i>  <input type="text" id="searchBox" placeholder="Search by title" ng-model="searchTxt"  ng-change="searchChanged(searchTxt)" ng-model-options="{debounce : 600}" />
+
+                </div>
+            </form>
+            <div id="sortByWrap">
+                Sort By : <i class="fa fa-clock-o" ng-click="sortByTime()"></i><i class="fa fa-thumbs-o-up" ng-click="sortByLikes()"></i><i class="fa fa-eye" data-ng-click="sortByWatch()"></i>
+            </div>
+
+        </div>
+    </div>
+
+
+
+<!--div>
+<ul class="dynamic-grid" angular-grid="pics" grid-width="300" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false" >
+     <li data-ng-repeat="pic in pics" class="grid">
+         <img src="{{pic.media.m}}" class="grid-img" data-actual-width = "{{pic.actualWidth}}"  data-actual-height="{{pic.actualHeight}}" />
+                    <div class="img-desc-wrap">
+                        <div class="title">
+                            {{pic.title}}
+                        </div>
+                        <div class="uploaded-date">
+                            Uploaded on : {{pic.date}}
+                        </div>
+                        <div class="likes-watch-wrap">
+                            <div class="likes"><span class="fa fa-thumbs-o-up"></span> {{pic.likes}}</div>
+                            <div class="watch"><span class="fa fa-eye"></span> {{pic.watch}}</div>
+                        </div>
+                    </div>
+     </li>
+ </ul>
+</div-->
+
+
+<!--div class="container-fluid light-bg">
+  <div class="grid">
+    <div class="grid-sizer col-xs-12 col-sm-6 col-md-4"></div>
+    <div class="grid-item col-xs-12 col-sm-6 col-md-4 ">
+						<div class="team-item">
+							<div class="team-image">
+								<img src="images/kids5_small.jpg" class="img-responsive" alt="author">
+							</div>
+							<div class="team-text">
+								<h3>Larry Parker</h3>
+								<div class="team-location">Barcelona, Spain</div>
+								<div class="team-position">– Development –</div>
+							</div>
+						</div>
+    </div>
+    <div class="grid-item col-xs-12 col-sm-6 col-md-4 ">
+<div class="team-item">
+							<div class="team-image">
+								<img src="images/kids3_small.jpg" class="img-responsive" alt="author">
+							</div>
+							<div class="team-text">
+								<h3>Larry Parker</h3>
+								<div class="team-location">Barcelona, Spain</div>
+								<div class="team-position">– Development –</div>
+								<p>Aradan bes namet, cons uectetur moiscing adon elit. Aliquam vitae fringilla unda augue.</p>
+							</div>
+						</div>
+    </div>
+    <div class="grid-item col-xs-12 col-sm-6 col-md-4 ">
+<div class="team-item">
+							<div class="team-image">
+								<img src="images/kids2_small.jpg" class="img-responsive" alt="author">
+							</div>
+							<div class="team-text">
+								<h3>Larry Parker</h3>
+								<div class="team-location">Barcelona, Spain</div>
+								<div class="team-position">– Development –</div>
+								<p>Aradan bes namet, cons uectetur moiscing adon elit. Aliquam vitae fringilla unda augue.</p>
+							</div>
+						</div>
+		</div>
+    <div class="grid-item col-xs-12 col-sm-6 col-md-4 ">
+<div class="team-item">
+							<div class="team-image">
+								<img src="images/kids5_small.jpg" class="img-responsive" alt="author">
+							</div>
+							<div class="team-text">
+								<h3>Larry Parker</h3>
+								<div class="team-location">Barcelona, Spain</div>
+								<div class="team-position">– Development –</div>
+								<p>Aradan bes namet, cons uectetur moiscing adon elit. Aliquam vitae fringilla unda augue.</p>
+							</div>
+						</div>
+		</div>
+    <div class="grid-item col-xs-12 col-sm-6 col-md-4 ">
+<div class="team-item">
+							<div class="team-image">
+								<img src="images/kids5_small.jpg" class="img-responsive" alt="author">
+							</div>
+							<div class="team-text">
+								<h3>Larry Parker</h3>
+								<div class="team-location">Barcelona, Spain</div>
+								<div class="team-position">– Development –</div>
+								<p>Aradan bes namet, cons uectetur moiscing adon elit. Aliquam vitae fringilla unda augue.</p>
+							</div>
+						</div>    </div>
+    <div class="grid-item col-xs-12 col-sm-6 col-md-4 ">
+<div class="team-item">
+							<div class="team-image">
+								<img src="images/kids3_small.jpg" class="img-responsive" alt="author">
+							</div>
+							<div class="team-text">
+								<h3>Larry Parker</h3>
+								<div class="team-location">Barcelona, Spain</div>
+								<div class="team-position">– Development –</div>
+								<p>Aradan bes namet, cons uectetur moiscing adon elit. Aliquam vitae fringilla unda augue.</p>
+							</div>
+						</div>    </div>
+    <div class="grid-item col-xs-12 col-sm-6 col-md-4 ">
+<div class="team-item">
+							<div class="team-image">
+								<img src="images/kids5_small.jpg" class="img-responsive" alt="author">
+							</div>
+							<div class="team-text">
+								<h3>Larry Parker</h3>
+								<div class="team-location">Barcelona, Spain</div>
+								<div class="team-position">– Development –</div>
+								<p>Aradan bes namet, cons uectetur moiscing adon elit. Aliquam vitae fringilla unda augue.</p>
+							</div>
+						</div>    </div>
+  </div>
+</div-->
+
+
+
+
+<div class="container">
+<div id="todo-list" class="row light-bg">
+	<ul class="dynamic-grid" angular-grid="eventList" ag-grid-width="300" ag-gutter-size="10" angular-grid-id="gallery" ag-refresh-on-img-load="true" >
+     <li data-ng-repeat="pic in eventList" class="grid">
+     <!--li data-ng-repeat="pic in eventList | orderBy: 'createdate' : sortDirection" class="grid"-->
+         <img ng-src="{{pic.imageurldefault || 'images/kids/1.jpg'}}" class="grid-img" />
+         <!--img src="images/kids/3.jpg" class="grid-img" /-->
+                    <div class="img-desc-wrap">
+                        <div class="title">
+                            <a href="#" ng-click="openModal(pic)" >{{pic.title}}</a>
+                            								<!--a href="#" data-toggle="modal" data-target="#Modal-1">{{pic.title}}</a-->
+
+                        </div>
+                        <!--div class="uploaded-date">
+                            Distance : {{ pic.distance | number:1 }}mi
+                        </div-->
+                        <p> {{ pic.body }} </p>
+                        <p> {{ pic.eventday }} {{ pic.eventmonth }}</p>
+                        <div class="likes-watch-wrap">
+                            <div class="likes"><span class="fa fa-map-marker"></span> {{ pic.distance | number:1 }}mi</div>
+                            <div class="likes"><span class="fa fa-thumbs-o-up"  ng-click="!isLikeEnabled||updateLike(pic)"></span> {{pic.likes}}</div>
+                            <div class="watch"><span class="fa fa-eye"></span> {{pic.watch}}</div>
+    <a type="button" ng-show="pic.eventurl" class="btn btn-default btn-sm pull-right" ng-href="{{ pic.eventurl }}"  >site</a></div>
+                        </div>
+                    </div>
+     </li>
+ </ul>
+<div>
+    <script type="text/ng-template" id="myPopoverTemplate.html">
+		<!--div class="modal fade" id="Modal-2" tabindex="-1" role="dialog" aria-labelledby="Modal-label-2"-->
+			<div class="modal-dialog" role="document">
+				<!--div class="modal-content"-->
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="Modal-label-1">{{ selectedEvent.title }}</h4>
+					</div>
+					<div class="modal-body">
+						<!--img src="images/demo/tourist3_small.jpg" alt="img01" class="img-responsive" /-->
+						<div class="modal-works"><span>{{ selectedEvent.tags }}</span></div>
+						<p>cost: {{ selectedEvent.cost }}</p>
+						<p>phone: {{ selectedEvent.phone }}</p>
+						<p>url: {{ selectedEvent.eventurl }}</p>
+				</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeModal()">Close</button>
+					</div>
+				<!--/div-->
+			</div>
+		</div>
+    </script>
+
+</div >
+
+<div class="container">
+						<a ng-click="getMore()" class="btn btn-default btn-lg btn-outline center-block">more</a>
+</div>
+<!--p id="back-top">
+			<a href="#top"><i class="fa fa-angle-up"></i></a>
+		</p>
+		<footer>
+			<div class="container text-center">
+				<p>Theme made by <a href="http://www.moozthemes.com"><span>MOOZ</span>Themes.com</a></p>
+			</div>
+		</footer-->
+
+		<!-- Modal for portfolio item 1 -->
+		<!--div class="modal fade" id="Modal-1" tabindex="-1" role="dialog" aria-labelledby="Modal-label-1">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="Modal-label-1">Dean & Letter</h4>
+					</div>
+					<div class="modal-body">
+						<img src="images/demo/tourist3_small.jpg" alt="img01" class="img-responsive" />
+						<div class="modal-works"><span>Branding</span><span>Web Design</span></div>
+						<p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div-->
+
+		<!-- Modal for portfolio item 2 -->
+		<!--div class="modal fade" id="Modal-2" tabindex="-1" role="dialog" aria-labelledby="Modal-label-2">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="Modal-label-2">Startup Framework</h4>
+					</div>
+					<div class="modal-body">
+						<img src="images/demo/tourist_small.jpg" alt="img01" class="img-responsive" />
+						<div class="modal-works"><span>Branding</span><span>Web Design</span></div>
+						<p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div-->
+
+
+<!-- EVENT LIST -->
+<!--div id="todo-list" class=" light-bg">
+<div class="col-sm-8 col-sm-offset-2" tagged-infinite-scroll="getMore()" tagged-infinite-scroll-disabled="fetching || disabled">
+
+<div class="media" style="background-color:white; margin-top: 10px;" ng-repeat="event in eventList">
+  <div class="media-left media-bottom" style="background-color:#3498db;padding:0px;">
+    <a href="#">
+     <h1 style="margin-bottom:-20px;padding-bottom:0px;text-align:center;"><span class="label" style="padding:0px;font-size:50px;background-color:#3498db;text-align:center;">{{ event.eventday }}</span></h1>
+     <h2 style="margin-top:0px; margin-bottom:0px;"><span class="label" style="height:100px;margin-top:0px;padding-bottom:0px;background-color:#3498db">{{ event.eventmonth }}</span></h2>
+    </a>
+  </div>
+  <div class="media-body" style="padding:10px">
+    <h4 class="media-heading">
+      <span ng-if="event.title">{{ event.title }}</span>
+      <span ng-if="event.title == empty">
+         <a ng-href="http://www.twitter.com/{{event.screenname }}">{{ event.author }}</a>
+         <span class="screen-name">@{{ event.screenname }}</span>
+      </span>
+</h4>
+    {{ event.body }}
+<div class="btn-toolbar">
+{{ event.distance | number:1 }}mi
+<style>.popover-content{word-wrap: break-word;}
+       .modal-body {word-wrap: break-word;}</style>
+     <a class="btn btn-success btn-md pull-right" ng-href="{{ event.eventurl }}" role="button">site</a>
+    <button type="button" class="btn btn-default btn-sm pull-right" ng-click="openModal(event)" >more</button></div>
+
+    <script type="text/ng-template" id="myPopoverTemplate.html">
+        <div class="form-group">
+          <label>cost:</label>{{ event.cost }}
+          <br/><label>phone:</label>{{ event.phone }}
+          <br/><label>url:</label>{{ event.eventurl }}
+        </div>
+    </script>
+  </div>
+</div-->

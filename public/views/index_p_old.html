@@ -1,0 +1,175 @@
+<div class="container">
+
+  <nav class="navbar navbar-default navbar-fixed-top" style="min-height:70px">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><font color="#3498db"><span class="fa fa-asterisk"></span></font>nearyou</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" ng-class="!navCollapsed && 'in'">
+          <ul class="nav navbar-nav">
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown" dropdown >
+            <a href="#" class="dropdown-toggle" dropdown-toggle data-toggle="dropdown" role="button" aria-expanded="false">{{ chosenDay }}<span class="caret"></span></a>
+                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                 	<li ng-repeat="day in dayList"><a href="" ng-click="daySelected(day)">{{ day }}</a></li>
+                 </ul>
+            </li>
+
+            </li>
+            <li class="dropdown" dropdown >
+            <a href="#" class="dropdown-toggle" dropdown-toggle data-toggle="dropdown" role="button" aria-expanded="false">{{ chosenFilter }}<span class="caret"></span></a>
+                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                 	<li ng-repeat="filter in filterList"><a href="" ng-click="filterSelected(filter)">{{ filter }}</a></li>
+                 </ul>
+            </li>
+
+            <li class="dropdown" dropdown >
+            <a href="#" class="dropdown-toggle" dropdown-toggle data-toggle="dropdown" role="button" aria-expanded="false">{{ chosenCity }}<span class="caret"></span></a>
+                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                 	<li ng-repeat="city in cityList"><a href="" ng-click="citySelected(city)">{{ city }}</a></li>
+                 </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+</div><!--/container-->
+
+		<!-- HEADER AND TODO COUNT -->
+<div class="jumbotron" style="background-image:url(./img/bike.jpg); height:300px; border:0; spacing:0; padding:0; margins:0" >
+<p>&nbsp;</p>
+  <h1 style="margin-left:10%">
+    <span style="background-color: #3498db; color: white; ">&nbsp; Do something interesting &nbsp;</span>
+  </h1>
+  <div style="height:100px">
+    <h2 style="margin-left:10%; color: white">{{chosenDay}} in {{chosenCity}}:
+      <span class="label" style="background-color: #3498db">{{ eventList.length }} </span>
+      <span ng-show="loading" class="fa fa-spinner fa-spin fa-1x"></span>
+    </h2>
+  </div>
+</div>
+
+<div class="container">
+
+
+<!--<div class="row" ng-repeat="event in eventList">
+<div class="col-sm-3">
+<div class="panel "    >
+  <div class="panel-heading" style="background-color:#2ecc71">
+    <h3 class="panel-title">SEP </h3>
+  </div>
+  <div class="panel-rightbody" style="height:80px"> 08</div>
+</div>
+<div class="col-sm-9">
+<div class="panel "    >
+  <div class="panel-heading" style="background-color:#2ecc71">
+    <h3 class="panel-title">
+       <a ng-href="http://www.twitter.com/{{event.screenname }}">{{ event.author }}</a>
+       <span class="screen-name">@{{ event.screenname }}</span>
+   </h3>
+  </div>
+  <div class="panel-rightbody" style="height:80px">
+    {{ event.body }}
+  </div>
+</div>
+</div>
+</div>
+-->
+
+<!-- EVENT LIST -->
+<div id="todo-list" class="row">
+<!--div class="col-sm-4 col-sm-offset-4" tagged-infinite-scroll="getMore()" tagged-infinite-scroll-disabled="fetching || disabled"-->
+<div class="col-sm-8 col-sm-offset-2" tagged-infinite-scroll="getMore()" tagged-infinite-scroll-disabled="fetching || disabled">
+
+<div class="media" style="background-color:white" ng-repeat="event in eventList">
+  <div class="media-left media-bottom" style="background-color:#3498db;padding:0px;">
+    <a href="#">
+     <h1 style="margin-bottom:-20px;padding-bottom:0px;text-align:center;"><span class="label" style="padding:0px;font-size:50px;background-color:#3498db;text-align:center;">{{ event.eventday }}</span></h1>
+     <h2 style="margin-top:0px; margin-bottom:0px;"><span class="label" style="height:100px;margin-top:0px;padding-bottom:0px;background-color:#3498db">{{ event.eventmonth }}</span></h2>
+ <!--img class="media-object" ng-src="{{event.avatar}}" alt="Generic placeholder image"-->
+    </a>
+  </div>
+  <div class="media-body" style="padding:10px">
+    <h4 class="media-heading">
+      <span ng-if="event.title">{{ event.title }}</span>
+      <span ng-if="event.title == empty">
+         <a ng-href="http://www.twitter.com/{{event.screenname }}">{{ event.author }}</a>
+         <span class="screen-name">@{{ event.screenname }}</span>
+      </span>
+</h4>
+    {{ event.body }}
+<div class="btn-toolbar">
+{{ event.distance | number:1 }}mi
+<style>.popover-content{word-wrap: break-word;}
+       .modal-body {word-wrap: break-word;}</style>
+    <!--button uib-popover-template="'myPopoverTemplate.html'" popover-title="{{ event.title }}" type="button" class="btn btn-default btn-sm pull-right">more</button-->
+     <a class="btn btn-success btn-sm pull-right" ng-href="{{ event.eventurl }}" role="button">site</a>
+    <button type="button" class="btn btn-default btn-sm pull-right" ng-click="openModal(event)" >more</button></div>
+
+    <script type="text/ng-template" id="myPopoverTemplate.html">
+        <div class="form-group">
+          <label>cost:</label>{{ event.cost }}
+          <br/><label>phone:</label>{{ event.phone }}
+          <br/><label>url:</label>{{ event.eventurl }}
+        </div>
+    </script>
+  </div>
+</div>
+
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">{{ selectedEvent.title }} </h3>
+        </div>
+        <div class="modal-body">
+            <ul>
+            <li>cost:{{ selectedEvent.cost }}
+            <li>phone: {{ selectedEvent.phone }}
+            <li>url: {{ selectedEvent.eventurl }}
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="closeModal()">OK</button>
+-        </div>
+    </script>
+
+
+ <!--loading more SPINNER -->
+ <p class="text-center"><span ng-show="loadingmore" class="fa fa-spinner fa-spin fa-3x"></span></p>
+
+ </div>
+</div>
+</div> <!-- CLOSE CONTAINER -->
+
+      <footer class="footer-distributed footer">
+      <div class="container">
+       <div class="footer-right">
+        <a href="#"><i class="fa fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-linkedin"></i></a>
+       </div>
+
+       <div class="footer-left">
+        <p class="footer-links">
+        <a href="#">Home</a>
+        ·
+        <a href="#">Blog</a>
+                ·
+        <a href="/about">About</a>
+        ·
+        <a href="/about">List your event</a>
+        ·
+        <a href="/contact">Contact</a>
+        </p>
+
+        <p>daily &copy; 2015</p>
+      </div>
+     </div>
+     </footer>
+

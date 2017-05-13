@@ -1,0 +1,147 @@
+
+<div class="view">
+<div class="container">
+<div class="row">
+<a class= "btn btn-lg btn-warning" href= "/admin/"><i class="fa fa-list"></i> List </a>
+<a class="btn btn-lg btn-success" href="/admin/edit/0"><i class="fa fa-plus"></i>&nbsp;Add </a>
+<a data-ng-show="eventRecord._id" class= "navbar-brand pull-right"><i class="fa fa-bolt"></i> Number: {{ eventRecord._id }} </a>
+</div>
+<h3>{{ title }}</h3>
+</header>
+<div class="col-md-12">
+
+<form role="form" name="myForm" class="form-horizontal">
+<div class="row">
+
+<div class= "form-group">
+<label class= "col-md-2">Active? </label>
+<div class="col-md-4">
+<div class="btn-group">
+
+        <label class="btn btn-primary" ng-model="eventRecord.active"  uib-btn-radio="true" >active</label>
+        <label class="btn btn-primary" ng-model="eventRecord.active" uib-btn-radio="false">not</label>
+</div>
+</div>
+</div>
+
+<div class= "form-group" >
+<label class= "col-md-2"> screenname</label>
+<div class="col-md-4">
+<input name="name" data-ng-model="eventRecord.screenname" type= "text" class= "form-control"  />
+</div>
+</div>
+
+<div class= "form-group">
+<label class= "col-md-2"> Author </label>
+<div class="col-md-4">
+<input name="author" data-ng-model="eventRecord.author" type= "text" class= "form-control" placeholder="author" />
+</div>
+</div>
+<div class= "form-group">
+<label class= "col-md-2">Body </label>
+<div class="col-md-4">
+<textarea data-ng-model="eventRecord.body" type="textarea" class="form-control" rows="6" placeholder= "body"></textarea>
+</div>
+</div>
+
+<div class= "form-group">
+<label class= "col-md-2">Event Date </label>
+<div class="col-md-4">
+<label>{{ eventRecord.eventdate }} </label>
+</div>
+</div>
+
+<div class= "form-group">
+<label class= "col-md-2">Event Date </label>
+<div class="col-md-4">
+    <select name="eventday" ng-model="eventRecord.eventday">
+      <option value="01">1</option>
+      <option value="02">2</option>
+      <option value="03">3</option>
+      <option value="04">4</option>
+      <option value="05">5</option>
+      <option value="06">6</option>
+      <option value="07">7</option>
+      <option value="08">8</option>
+      <option value="09">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12">12</option>
+      <option value="13">13</option>
+      <option value="14">14</option>
+      <option value="15">15</option>
+      <option value="16">16</option>
+      <option value="17">17</option>
+      <option value="18">18</option>
+      <option value="19">19</option>
+      <option value="20">20</option>
+      <option value="21">21</option>
+      <option value="22">22</option>
+      <option value="23">23</option>
+      <option value="24">24</option>
+      <option value="25">25</option>
+      <option value="26">26</option>
+      <option value="27">27</option>
+      <option value="28">28</option>
+      <option value="29">29</option>
+      <option value="30">30</option>
+      <option value="31">31</option>
+   </select>
+
+    <select name="eventmonth" ng-model="eventRecord.eventmonth">
+      <option value="JAN">JAN</option>
+      <option value="FEB">FEB</option>
+      <option value="MAR">MAR</option>
+      <option value="APR">APR</option>
+      <option value="MAY">MAY</option>
+      <option value="JUN">JUN</option>
+      <option value="JUL">JUL</option>
+      <option value="AUG">AUG</option>
+      <option value="SEP">SEP</option>
+      <option value="OCT">OCT</option>
+      <option value="NOV">NOV</option>
+      <option value="DEC">DEC</option>
+   </select>
+    <select name="eventyear" ng-model="eventRecord.eventyear">
+      <option value="2015">2015</option>
+      <option value="2016">2016</option>
+   </select><br>
+</div>
+</div>
+
+
+<div class= "form-group">
+<label class= "col-md-2">Place </label>
+<div class="col-md-4">
+<input data-ng-model="eventRecord.place" type="text" class= "form-control" placeholder= "city"/>
+</div>
+</div>
+
+<div class= "form-group">
+<label class= "col-md-2">eventurl </label>
+<div class="col-md-4">
+<input data-ng-model="eventRecord.eventurl"  type="text" class="form-control" placeholder="eventurl"/>
+</div>
+</div>
+
+<div class= "form-group">
+<label class= "col-md-2">Tags </label>
+<div class="col-md-4">
+<input data-ng-model="eventRecord.tags" ng-list type="text" class="form-control" placeholder="tags"/>
+</div>
+</div>
+
+<div class= "form-group">
+<label class= "col-md-2"></label>
+<div class="col-md-4">
+<a href="/admin/" class="btn">Cancel</a>
+<button data-ng-click="saveEvent(eventRecord);" ng-disabled="isClean()"
+class="btn btn-primary">{{buttonText}}</button>
+<button data-ng-click="deleteEvent(eventRecord)" data-ng-show="eventRecord._id" class="btn btn-warning">Delete</button>
+</div>
+</div>
+</div>
+</form>
+</div></div>
+</div>
+</div>

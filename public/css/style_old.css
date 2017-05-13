@@ -1,0 +1,342 @@
+*
+{
+    box-sizing: border-box;
+}
+
+body
+{
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+
+    margin: 0;
+    /**padding: 0 0 40px 0;**/
+
+    color: blue; /*white*/
+    background: grey; /*#2c3e50;*/
+}
+
+footer
+{
+    position: absolute
+    z-index: 999;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+
+    width: 100%;
+    /**padding: 10px;**/
+
+    background: #3498db;
+}
+
+footer a,
+footer span
+{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+footer a.link-back
+{
+    text-decoration: none;
+
+    color: #2c3e50;
+}
+
+footer .twitter-share-button
+{
+    margin-right: 10px;
+}
+
+footer span.update-message
+{
+    padding-top: 3px;
+
+    color: #2c3e50;
+}
+
+footer .twitter-share-button,
+footer .update-message
+{
+    float: right;
+}
+
+.loader
+{
+    text-align: center;
+}
+
+.loader img
+{
+    max-height: 0;
+    margin: 0;
+
+    -webkit-transition: 1s all ease;
+       -moz-transition: 1s all ease;
+        -ms-transition: 1s all ease;
+         -o-transition: 1s all ease;
+            transition: 1s all ease;
+}
+
+.loader.active img
+{
+    max-height: 50px;
+    margin: 10px auto 20px;
+}
+
+.no__tification-bar
+{
+    font-size: 13px;
+    font-weight: bold;
+
+    position: fixed;
+    top: -60px;
+
+    width: 100%;
+
+    -webkit-transition: 300ms top ease;
+       -moz-transition: 300ms top ease;
+        -ms-transition: 300ms top ease;
+         -o-transition: 300ms top ease;
+            transition: 300ms top ease;
+    text-align: center;
+
+    color: white;
+    background: rgba(241, 196, 15,.9);
+}
+
+.no__tification-bar.active
+{
+    top: 0;
+}
+
+.no__tification-bar a
+{
+    color: white;
+}
+
+.tweets
+{
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 20px;
+    margin-top: 70px;
+}
+
+.tweet
+{
+    position: relative;
+
+    display: block;
+    overflow: hidden;
+
+    max-height: 0px;
+    margin: 0;
+
+    list-style-type: none;
+
+    color: #2c3e50;
+    border-radius: 3px;
+    background: #3498db;
+    box-shadow: 0 3px 0 #eee;
+}
+
+.tweet.active
+{
+    /*max-height: 125px;*/
+    max-height: 250px;
+    margin: 20px 0;
+
+    -webkit-transition: 1s all ease;
+       -moz-transition: 1s all ease;
+        -ms-transition: 1s all ease;
+         -o-transition: 1s all ease;
+            transition: 1s all ease;
+}
+
+.tweet .avatar
+{
+    position: relative;
+
+    display: inline-block;
+    float: left;
+    clear: both;
+
+    width: 48px;
+    margin: 10px;
+
+    border: 2px solid #ccc;
+    border-radius: 48px;
+}
+
+.topimg
+{
+    float: left;
+    clear: both;
+    height: 125px;
+    width: 100%;
+}
+
+.tweet blockquote
+{
+    font-size: 14px;
+
+    display: inline-block;
+    float: right;
+
+    width: calc(100% - 72px);
+    margin: 0;
+    padding: 10px;
+    border-left: none;
+    background-color: white;
+}
+
+.tweet blockquote cite
+{
+    font-weight: bold;
+    font-style: normal;
+}
+
+.tweet blockquote cite a
+{
+    display: inline-block;
+
+    margin-right: 5px;
+
+    text-decoration: none;
+
+    color: #1abc9c;
+}
+
+.tweet blockquote cite a:hover
+{
+    text-decoration: underline;
+}
+
+.tweet blockquote .screen-name
+{
+    font-size: 13px;
+    font-weight: normal;
+
+    color: #ccc;
+}
+
+.tweet blockquote .content
+{
+    display: block;
+    clear: left;
+
+    margin-top: 5px;
+}
+
+.tweet:before,
+.tweet:after
+{
+    display: table;
+
+    content: ' ';
+}
+
+.tweet:after
+{
+    clear: both;
+}
+
+@media (max-width: 650px)
+{
+    footer span.update-message
+    {
+        display: none;
+    }
+}
+
+@media (max-width: 500px)
+{
+    footer a.link-back
+    {
+        font-size: 0;
+    }
+    footer a:after
+    {
+        font-size: 12px;
+
+        content: ' ';
+    }
+}
+
+/**from http://demo.tutorialzine.com/2015/01/freebie-5-responsive-footer-templates/css/footer-distributed.css **/
+
+.footer-distributed{
+	background-color: #3498db;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+	box-sizing: border-box;
+	width: 100%;
+	text-align: left;
+	font: normal 16px sans-serif;
+
+	padding: 45px 50px;
+	margin-top: 80px;
+}
+
+.footer-distributed .footer-left p{
+	color:  #3498db;
+	font-size: 14px;
+	margin: 0;
+}
+
+/* Footer links */
+
+.footer-distributed p.footer-links{
+	font-size:18px;
+	font-weight: bold;
+	color:  #ffffff;
+	margin: 0 0 10px;
+	padding: 0;
+}
+
+.footer-distributed p.footer-links a{
+	display:inline-block;
+	line-height: 1.8;
+	text-decoration: none;
+	color:  inherit;
+}
+
+.footer-distributed .footer-right{
+	float: right;
+	margin-top: 6px;
+	max-width: 180px;
+}
+
+.footer-distributed .footer-right a{
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	background-color:  #3498db;
+	border-radius: 2px;
+
+	font-size: 20px;
+	color: #ffffff;
+	text-align: center;
+	line-height: 35px;
+
+	margin-left: 3px;
+}
+
+/* If you don't want the footer to be responsive, remove these media queries */
+
+@media (max-width: 600px) {
+
+	.footer-distributed .footer-left,
+	.footer-distributed .footer-right{
+		text-align: center;
+	}
+
+	.footer-distributed .footer-right{
+		float: none;
+		margin: 0 auto 20px;
+	}
+
+	.footer-distributed .footer-left p.footer-links{
+		line-height: 1.8;
+	}
+}

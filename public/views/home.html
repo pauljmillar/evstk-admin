@@ -1,0 +1,37 @@
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-lg btn-success" href="/admin/edit/0"><i class="fa fa-plus"></i>&nbsp;Add</a>
+<div class="col-md-12" data-ng-show="eventList.length > 0">
+
+<table class="table table-striped table-bordered">
+<thead>
+<th>active?&nbsp;</th>
+<th>eventdate&nbsp;</th>
+<th>screenname&nbsp;</th>
+<th>author&nbsp;</th>
+<th>body&nbsp;</th>
+<th>tags&nbsp;</th>
+<th>place&nbsp;</th>
+</thead>
+<tbody>
+<tr ng-repeat="data in eventList | startFrom: (currentPage - 1) * pageSize | limitTo: pageSize">
+<td>{{data.active}}</td>
+<td>{{data.eventdate}}</td>
+<td>{{data.screenname}}</td>
+<td>{{data.author}}</td>
+<td>{{data.body}}</td>
+<td>{{data.tags}}</td>
+<td>{{data.place}}</td>
+<td><a class="btn btn-sm btn-success" href="/admin/edit/{{data._id}}"><i class="fa fa-bolt"></i>&nbsp;Edit</a>
+<button data-ng-click="deleteEvent(data._id)"  class="btn btn-sm btn-danger">Delete</button>
+</td>
+</tr>
+</tbody>
+</table>
+<pagination total-items="eventList.length" ng-model="currentPage" items-per-page="pageSize" ></pagination>
+</div>
+<div class="col-md-12" data-ng-show="eventList.length == 0">
+<div class="col-md-12">
+<h4>No customers found</h4>
+</div>
+</div>
+</div>

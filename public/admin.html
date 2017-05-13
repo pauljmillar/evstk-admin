@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" ng-app="adminApp">
+  <head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>daily2</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/static.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+        <!-- SPELLS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script><!-- load angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script><!-- load angular routes-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.0/ui-bootstrap-tpls.js"></script><!--load ui bootstrap -->
+
+       <script src="js/controllers/AdminCtrl.js"></script> <!-- load up our controller -->
+        <script src="js/controllers/EditCtrl.js"></script> <!-- load up our controller -->
+	<script src="js/services/todos.js"></script> <!-- load our todo service -->
+	<script src="js/adminCore.js"></script> <!-- load our main application -->
+ </head>
+<body  >
+
+
+<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">daily</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/about">Post</a></li>
+            <li><a href="/">View</a></li>
+          </ul>
+        </div>
+        </div>
+    </nav>
+
+
+    <section id="title" class="emerald">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>Faqs</h1>
+                    <p></p>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="breadcrumb pull-right">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Pages</a></li>
+                        <li class="active">FAQ</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section><!--/#title-->
+
+    <section id="admin" class="container">
+<div ng-view></div>
+</section>
+
+     <footer class="footer-distributed footer">
+      <div class="container">
+       <div class="footer-right">
+        <a href="#"><i class="fa fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-linkedin"></i></a>
+        <a href="#"><i class="fa fa-github"></i></a>
+      </div>
+
+      <div class="footer-left">
+        <p class="footer-links">
+        <a href="#">Home</a>
+        ·
+        <a href="#">Blog</a>
+                ·
+        <a href="/about">About</a>
+        ·
+        <a href="/about">List your event</a>
+        ·
+        <a href="/contact">Contact</a>
+        </p>
+
+        <p>daily &copy; 2015</p>
+     </div>
+           </div>
+      </footer>
+
+</body>
+</html>

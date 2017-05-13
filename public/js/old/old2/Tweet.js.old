@@ -1,0 +1,188 @@
+var mongoose = require('mongoose');
+
+// Create a new schema for our tweet data
+var schema = new mongoose.Schema({
+    twid       : String
+  , active     : Boolean
+  , author     : String
+  , avatar     : String
+  , body       : String
+  , date       : Date
+  , screenname : String
+  , place      : String
+  , eventdate  : Date
+  , tags  : [String]
+  , eventimage : String
+  , eventurl : String
+  , homeurl : String
+});
+
+// Create a static getLocations method to populate location options from db
+//schema.statics.getLocations = function(callback) {
+
+//  var locations = [];
+
+  //Tweet.distinct( 'place', { price: { $gt: 10 } } )
+//  Tweet.distinct( 'place' ).exec(function(err,docs){
+
+//    if(!err) {
+//      locations = docs;  // We got locations
+//    }
+
+    // Pass them back to the specified callback
+//    callback(locations);
+
+// });
+//};
+
+// Create a static getTweets method to return tweet data from the db
+//
+schema.statics.getTweets = function(page, skip, loc, fil, dte, callback) {
+
+//testing
+//loc="Chicago"
+
+console.log("in model Tweet: "+loc);
+  var tweets = [],
+      locations = [],
+      combofilters = [],
+      filters = [],
+      start = (page * 10) + (skip * 1);
+
+//NOTE: THIS CODE BEING USED FROM routes.js
+  var compareDate, dd, mm, yyyy;
+  var today = new Date();
+  dd = today.getDate();
+  mm = today.getMonth(); //January is 0!
+  yyyy = today.getFullYear();
+  todayDate=new Date(yyyy,mm,dd);
+
+switch(dte){
+ case "today":
+  compareDate=todayDate;
+console.log("today case");
+  break;
+ case "tomorrow":
+  var tomorrowDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+  dd = tomorrowDate.getDate();
+  mm = tomorrowDate.getMonth(); //January is 0!
+  yyyy = tomorrowDate.getFullYear();
+  compareDate=new Date(yyyy,mm,dd);
+console.log("tomorrow case");
+  break;
+ case "weekend":
+  var today = new Date();
+  var todayDay = today.getDay();
+  switch(todayDay){
+   case 5:
+   case 6:
+   case 0:
+    compareDate=todayDate;
+    break;
+   default:
+   var numD=5-todayDay;
+   var wkndDate = new Date(new Date().getTime() + numD*(24 * 60 * 60 * 1000));
+   dd = wkndDate.getDate();
+   mm = wkndDate.getMonth(); //January is 0!
+   yyyy = wkndDate.getFullYear();
+  compareDate=new Date(yyyy,mm,dd);
+console.log("650 case");
+  break;
+  } 
+ default:
+console.log("default case");
+  compareDate=new Date(yyyy,mm,dd);
+ }
+
+console.log("TODAY2: "+yyyy+' '+mm+' '+dd);
+console.log("dte: "+dte);
+console.log("new date:"+compareDate);
+
+  Tweet.distinct( 'tags', { 'place': loc, 'eventdate': {$gte: compareDate}} ).exec(function(err,docs){
+    if(!err) {
+
+      filters = docs;  //we go locations
+
+      // add default if none
+      if (docs == '') {
+		  console.log("filters null");
+		  filters = ["none"];
+		  }
+
+     //add city
+     for (i=0; i<filters.length; i++) {
+        combofilters[i]={name:filters[i], city: loc};
+     }
+      console.log("in model JSON, filters: "+JSON.stringify(filters));
+
+
+     Tweet.distinct( 'place', {'eventdate': {$gte: compareDate}} ).exec(function(err,docs){
+     if(!err) {
+       locations = docs;  //we go locations
+
+        // add default if none
+      if (docs == '') {
+		  console.log("docs null");
+		  locations = ["none"];
+		  }
+
+     if(!fil) { //don't try to apply  filter if it has not been selected
+      console.log("NOT applying filter: "+fil);
+
+       // Query the db, using skip and limit to achieve page chunks
+       Tweet.find({ 'place' :  {$regex : ".*"+loc+".*", $options : "i"}, 'active':true, 'eventdate': {$gte: compareDate} },'twid active author avatar body date screenname place eventdate tags eventimage',{skip: start, limit: 10}).sort({eventdate: 1}).exec(function(err,docs){
+
+       // If everything is cool...
+       if(!err) {
+console.log("no error");
+         tweets = docs;  // We got tweets
+         tweets.forEach(function(tweet){
+         tweet.active = true; // Set them to active
+         });
+       }
+
+       callback(tweets,locations,combofilters);
+
+       });
+     } else {
+      console.log("applying filter: "+fil);
+       // Query the db, using skip and limit to achieve page chunks
+       Tweet.find({ 'place' :  {$regex : ".*"+loc+".*", $options : "i"}, 'tags':fil, 'active':true, 'eventdate': {$gte: compareDate} },'twid active author avatar body date screenname place eventdate tags eventimage',{skip: start, limit: 10}).sort({eventdate: 1}).exec(function(err,docs){
+
+       // If everything is cool...
+       if(!err) {
+console.log("no error");
+         tweets = docs;  // We got tweets
+         tweets.forEach(function(tweet){
+         tweet.active = true; // Set them to active
+         });
+       }
+
+       callback(tweets,locations,combofilters);
+
+       });
+
+
+     }
+
+   }
+  });
+
+
+
+    }
+  });
+
+
+  //Tweet.distinct( 'place' ).exec(function(err,docs){
+  //  if(!err) {
+  //    locations = docs;  //we go locations
+  //  }
+  //});
+
+    // Pass them back to the specified callback
+  //  callback(tweets, locations);
+};
+
+// Return a Tweet model based upon the defined schema
+module.exports = Tweet = mongoose.model('Tweet', schema);
