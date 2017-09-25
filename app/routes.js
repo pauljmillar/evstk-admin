@@ -447,7 +447,7 @@ Tweet.aggregate([
           service: 'Gmail',
             auth: {
               user: "paul.millar@gmail.com",
-              pass: "ventura123"
+              pass: "XXX"
             }
           });
           mailOpts = {
